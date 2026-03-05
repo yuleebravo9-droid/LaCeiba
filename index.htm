@@ -2,26 +2,29 @@
 
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>La Ceiba</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Libre+Baskerville&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Libre+Baskerville&display=swap" rel="stylesheet">
 
 <style>
+
 body{
 margin:0;
 font-family:'Libre Baskerville',serif;
 background:linear-gradient(#E8B45C,#C85C2E,#7A2E2E);
 color:#3B2A22;
-overflow-x:hidden;
 }
+
+/* header */
 
 header{
 background-image:url("https://i.pinimg.com/736x/ae/44/ae/ae44aecf04e81d829b7b62fa50cda247.jpg");
 background-size:cover;
-background-position:center;
-height:340px;
+height:350px;
 display:flex;
 flex-direction:column;
 justify-content:center;
@@ -32,16 +35,13 @@ text-align:center;
 
 header h1{
 font-family:'Playfair Display';
-font-size:72px;
+font-size:70px;
 background:rgba(0,0,0,0.4);
-padding:12px 34px;
-border-radius:12px;
-margin:0;
+padding:12px 30px;
+border-radius:10px;
 }
 
-header button{
-margin-top:15px;
-}
+/* container */
 
 .container{
 max-width:900px;
@@ -49,32 +49,18 @@ margin:auto;
 padding:40px 20px;
 }
 
-/* editor */
-#editor{
-display:none;
+/* relatos */
+
+.relato{
 background:#FFF6E9;
-padding:20px;
+padding:30px;
 border-radius:10px;
 margin-bottom:40px;
 box-shadow:0 10px 20px rgba(0,0,0,0.15);
 }
 
-textarea,input{
-width:100%;
-padding:10px;
-margin-bottom:10px;
-font-family:'Libre Baskerville';
-border-radius:6px;
-border:none;
-}
-
-/* biblioteca */
-.relato{
-background:#FFF6E9;
-padding:25px;
-border-radius:10px;
-margin-bottom:25px;
-box-shadow:0 10px 20px rgba(0,0,0,0.15);
+.relato h2{
+font-family:'Playfair Display';
 }
 
 button{
@@ -86,63 +72,44 @@ border-radius:6px;
 cursor:pointer;
 }
 
-/* lector */
-#lector{
-display:none;
-background:#FFF6E9;
-padding:40px;
-border-radius:10px;
-line-height:1.9;
-box-shadow:0 10px 20px rgba(0,0,0,0.2);
+/* buscador */
+
+#buscar{
+width:100%;
+padding:10px;
+margin-bottom:30px;
 }
 
-#lector h2{
-font-family:'Playfair Display';
-}
+/* autora */
 
-/* comentarios */
-.comment{
-background:#eee;
-padding:6px;
-margin-top:5px;
-border-radius:5px;
-}
-
-/* autor */
 .author{
 display:flex;
 gap:20px;
 background:#FFF6E9;
 padding:20px;
 border-radius:10px;
-margin-top:40px;
-align-items:center;
+margin-top:50px;
 }
 
 .author img{
-width:130px;
+width:120px;
 border-radius:50%;
 }
 
-#avatarEditor{
-display:none;
-margin-top:10px;
-}
-
 /* modo nocturno */
+
 .dark{
-background:#0f0f18;
+background:#111118;
 color:#eee;
 }
 
 .dark .relato,
-.dark #editor,
-.dark #lector,
 .dark .author{
 background:#1f1f2a;
 }
 
 /* estrellas */
+
 .star{
 position:fixed;
 width:2px;
@@ -151,6 +118,7 @@ background:white;
 }
 
 /* luciernagas */
+
 .firefly{
 position:fixed;
 width:6px;
@@ -165,6 +133,7 @@ animation:blink 3s infinite;
 0%,100%{opacity:0.2}
 50%{opacity:1}
 }
+
 </style>
 
 </head>
@@ -172,65 +141,78 @@ animation:blink 3s infinite;
 <body>
 
 <header>
+
 <h1>La Ceiba</h1>
+
 <button onclick="toggleDark()">Modo nocturno</button>
+
 </header>
 
 <div class="container">
-
-<div id="editor">
-
-<h2>Escribir relato</h2>
-
-<input id="titulo" placeholder="Título del relato">
-
-<textarea id="texto" rows="7" placeholder="Escribe tu relato..."></textarea>
-
-<button onclick="publicar()">Publicar</button>
-
-</div>
 
 <h2>Buscar relatos</h2>
 
 <input id="buscar" placeholder="Buscar..." onkeyup="buscar()">
 
-<h2>Biblioteca</h2>
+<div id="biblioteca">
 
-<div id="biblioteca"></div>
+<!-- RELATO 1 -->
 
-<div id="lector">
+<div class="relato">
 
-<h2 id="tituloLectura"></h2>
+<h2>Mi primera publicación</h2>
 
-<p id="textoLectura"></p>
+<p>
 
-<p id="contador"></p>
+Esta es mi primera publicación, pero no es la primera vez que escribo. Es curioso que, mientras luchaba con la tecnología antigua de crear una página por código, me encontré con un viejo escrito de hace cinco años.
 
-<button onclick="volver()">⬅ Volver a la biblioteca</button>
+Podría decir que mi estilo de escritura ha mejorado, pero sería desacreditar, en gran medida, lo que la Yuleidys de 16 años fue capaz de escribir a las 6 a. m., sin haber conocido aún las dulces mieles del amor ni el amargo veneno del mismo sentimiento.
+
+Esta no es una historia de ahora; es un reciclaje que encontré del 2021.
+
+"Se levantó por el sonido lejano de unas gotas de agua que parecían provenir del grifo. Caminó hacia la cocina para cerrar aquella maldita llave que tanto le costaba ajustar. Mientras avanzaba, extrañó aquellas noches silenciosas pero cálidas en las que él estaba allí: aquel que alguna vez fue eterno y que hoy ya no estaba.
+
+Solía recordarlo en noches como esta, cuando la luna llena iluminaba todo y la estrella que él le había regalado brillaba con más intensidad. Aunque sabía que no brillaba por ella, ni por él… nunca más por ellos.
+
+No quería pensarlo. No quería llorarlo. No quería… por Dios, que no quería. Y aun así terminó de rodillas en el suelo, con la mirada nublada y las piernas temblorosas. No podía comprender cómo había acabado todo. Sabía que, en realidad, no había terminado del todo, pero él solo había dicho: «No más».
+
+Ella quería más. Quería una historia de amor eterna. Quería bailar bajo la lluvia hasta que le dolieran los pies. Pero también sabía que él no volvería. No porque no quisiera… sino porque no podía.
+
+En su mente se repetía una idea: si pudiera, él llamaría. Algo —o alguien— se lo impedía. Deseaba volver a sus brazos, aunque estaba convencida de que alguna fuerza lo mantenía atado.
+
+No quería conocer la verdad. Solo quería llorar. Pero en sus oídos no dejaba de resonar el insistente sonido de las malditas gotas que habían empezado todo.
+
+¿Por qué persistían? ¿Por qué no se callaban? ¿Por qué él no volvía?
+
+Finalmente se levantó y caminó hacia el grifo. Para su sorpresa, no goteaba. Permanecía quieto, sereno bajo la luz de la luna.
+
+Fue entonces —y solo entonces— cuando se dio cuenta de que aquellas gotas no venían del grifo: eran los pensamientos que se desbordaban de su mente y se reflejaban en sus hermosos ojos color miel."
+
+Atte: MentalWhisper
+Asi es, tenia un seudonimo. Si quieren ver la página de este relato es: https://mentalwhisper.wordpress.com/
+
+Gracias por llegar hasta aquí, los tqm <3
+
+</p>
+
+</div>
 
 </div>
 
 <div class="author">
 
-<div>
-
-<img id="avatar" src="yuleidys-cartoon.png.png">
-
-<div id="avatarEditor">
-
-<input type="file" id="subirAvatar">
-
-</div>
-
-</div>
+<img src="yuleidys-cartoon.png.png">
 
 <div>
 
 <h3>Sobre la autora</h3>
 
 <p>
-Soy Yuleidys. Escribo relatos que nacen de emociones, recuerdos y momentos pequeños de la vida.
-La Ceiba es un refugio para quienes aman leer historias que brotan del alma.
+
+Soy Yule. Escribo relatos que nacen de emociones, recuerdos y pequeños momentos de la vida.
+
+La Ceiba es un refugio para quienes buscan sentir algo al leer.
+
 </p>
 
 </div>
@@ -241,147 +223,19 @@ La Ceiba es un refugio para quienes aman leer historias que brotan del alma.
 
 <script>
 
-let relatos=JSON.parse(localStorage.getItem("relatos"))||[];
-
-function guardar(){
-localStorage.setItem("relatos",JSON.stringify(relatos));
-}
-
-/* publicar */
-
-function publicar(){
-
-let t=document.getElementById("titulo").value;
-let x=document.getElementById("texto").value;
-
-if(!t||!x)return;
-
-relatos.push({
-titulo:t,
-texto:x,
-likes:0,
-comentarios:[],
-lecturas:0
-});
-
-guardar();
-mostrar();
-
-document.getElementById("titulo").value="";
-document.getElementById("texto").value="";
-
-}
-
-/* mostrar biblioteca */
-
-function mostrar(){
-
-let cont=document.getElementById("biblioteca");
-cont.innerHTML="";
-
-relatos.forEach((r,i)=>{
-
-let div=document.createElement("div");
-div.className="relato";
-
-div.innerHTML=`
-
-<h3>${r.titulo}</h3>
-
-<p>${r.texto.substring(0,140)}...</p>
-
-<button onclick="leer(${i})">Leer</button>
-
-<button onclick="like(${i})">❤️ ${r.likes}</button>
-
-<div>
-<input id="c${i}" placeholder="Comentar">
-<button onclick="comentar(${i})">Enviar</button>
-</div>
-
-<div>
-${r.comentarios.map(c=>"<div class='comment'>"+c+"</div>").join("")}
-</div>
-
-`;
-
-cont.appendChild(div);
-
-});
-
-}
-
-/* leer */
-
-function leer(i){
-
-document.getElementById("biblioteca").style.display="none";
-document.getElementById("lector").style.display="block";
-
-document.getElementById("tituloLectura").innerText=relatos[i].titulo;
-document.getElementById("textoLectura").innerText=relatos[i].texto;
-
-relatos[i].lecturas++;
-
-document.getElementById("contador").innerText="Lecturas: "+relatos[i].lecturas;
-
-guardar();
-
-}
-
-/* volver */
-
-function volver(){
-
-document.getElementById("biblioteca").style.display="block";
-document.getElementById("lector").style.display="none";
-
-}
-
-/* like */
-
-function like(i){
-relatos[i].likes++;
-guardar();
-mostrar();
-}
-
-/* comentarios */
-
-function comentar(i){
-
-let input=document.getElementById("c"+i);
-
-if(!input.value)return;
-
-relatos[i].comentarios.push(input.value);
-
-guardar();
-mostrar();
-
-}
-
-/* buscar */
+/* buscador */
 
 function buscar(){
 
 let filtro=document.getElementById("buscar").value.toLowerCase();
 
-let cont=document.getElementById("biblioteca");
+let relatos=document.querySelectorAll(".relato");
 
-cont.innerHTML="";
+relatos.forEach(r=>{
 
-relatos.filter(r=>r.titulo.toLowerCase().includes(filtro)).forEach((r,i)=>{
+let titulo=r.innerText.toLowerCase();
 
-let div=document.createElement("div");
-
-div.className="relato";
-
-div.innerHTML=`<h3>${r.titulo}</h3>
-<p>${r.texto.substring(0,140)}...</p>
-<button onclick="leer(${i})">Leer</button>`;
-
-cont.appendChild(div);
+r.style.display=titulo.includes(filtro)?"block":"none";
 
 });
 
@@ -415,49 +269,6 @@ document.body.appendChild(s);
 
 }
 
-/* editor y avatar solo en modo edit */
-
-if(window.location.hash === "#edit"){
-
-document.getElementById("editor").style.display="block";
-document.getElementById("avatarEditor").style.display="block";
-
-}
-
-/* subir avatar */
-
-let avatarGuardado = localStorage.getItem("avatar");
-
-if(avatarGuardado){
-document.getElementById("avatar").src = avatarGuardado;
-}
-
-let subir=document.getElementById("subirAvatar");
-
-if(subir){
-
-subir.addEventListener("change",function(){
-
-let file=this.files[0];
-
-let reader=new FileReader();
-
-reader.onload=function(e){
-
-let img=e.target.result;
-
-document.getElementById("avatar").src=img;
-
-localStorage.setItem("avatar",img);
-
-}
-
-reader.readAsDataURL(file);
-
-});
-
-}
-
 /* luciernagas */
 
 for(let i=0;i<18;i++){
@@ -472,12 +283,12 @@ document.body.appendChild(f);
 
 }
 
-mostrar();
-
 </script>
 
 </body>
 </html>
+
+
 
 
 
