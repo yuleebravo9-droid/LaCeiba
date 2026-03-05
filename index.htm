@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
 
@@ -7,7 +8,7 @@
 
 <title>La Ceiba</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Libre+Baskerville&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Libre+Baskerville&display=swap" rel="stylesheet">
 
 <style>
 
@@ -16,6 +17,7 @@ margin:0;
 font-family:'Libre Baskerville',serif;
 background:linear-gradient(#E8B45C,#C85C2E,#7A2E2E);
 color:#3B2A22;
+overflow-x:hidden;
 }
 
 header{
@@ -34,15 +36,13 @@ color:white;
 header h1{
 font-family:'Playfair Display',serif;
 font-size:70px;
-margin:0;
 background:rgba(0,0,0,0.35);
 padding:15px 35px;
 border-radius:10px;
 }
 
 header p{
-margin-top:10px;
-background:rgba(0,0,0,0.25);
+background:rgba(0,0,0,0.3);
 padding:6px 15px;
 border-radius:6px;
 }
@@ -53,19 +53,17 @@ margin:auto;
 padding:60px 20px;
 }
 
-.relato{
+.relato-card{
 background:#FFF6E9;
-padding:35px;
-margin-bottom:35px;
+padding:25px;
 border-radius:10px;
+margin-bottom:25px;
 box-shadow:0 10px 20px rgba(0,0,0,0.15);
 }
 
-<div class="relato">
-<h2>Gotas</h2>
-<p>Esta es mi primera publicación, pero no es la primera vez que escribo. Es curioso que, mientras luchaba con la tecnología antigua de crear una página por código, me encontré con un viejo escrito de hace cinco años..</p>
-<a href="relatosgotas.txt">Leer relato</a>
-</div>
+.relato-card h2{
+font-family:'Playfair Display',serif;
+color:#C85C2E;
 }
 
 button{
@@ -77,87 +75,144 @@ border-radius:6px;
 cursor:pointer;
 }
 
-#editor{
+.relato-completo{
 display:none;
+background:#FFF6E9;
+padding:35px;
+border-radius:10px;
+box-shadow:0 10px 20px rgba(0,0,0,0.15);
+}
+
+.relato-texto{
+margin-top:20px;
+line-height:1.9;
+white-space:pre-line;
 }
 
 .author{
 display:flex;
-align-items:center;
 gap:25px;
-margin-top:80px;
+margin-top:70px;
 background:#FFF6E9;
 padding:25px;
 border-radius:12px;
 }
 
 .author img{
-width:150px;
+width:140px;
 border-radius:50%;
 }
 
-.modal{
-position:fixed;
-left:0;
-top:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.8);
-display:none;
-justify-content:center;
-align-items:center;
-padding:20px;
+footer{
+text-align:center;
+padding:40px;
+color:white;
 }
 
-.book{
-background:white;
-max-width:700px;
-padding:40px;
-border-radius:8px;
-line-height:1.8;
+/* hojas */
+
+.leaf{
+position:fixed;
+top:-40px;
+font-size:18px;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+0%{transform:translateY(-50px) rotate(0)}
+100%{transform:translateY(110vh) rotate(360deg)}
+}
+
+/* luciernagas */
+
+.firefly{
+position:fixed;
+width:6px;
+height:6px;
+background:#FFD86B;
+border-radius:50%;
+box-shadow:0 0 10px #FFD86B;
+animation:blink 3s infinite;
+}
+
+@keyframes blink{
+0%,100%{opacity:0.2}
+50%{opacity:1}
+}
+
+/* modo nocturno */
+
+.dark{
+background:#0f0f14;
+color:#ddd;
+}
+
+.dark .relato-card,
+.dark .relato-completo,
+.dark .author{
+background:#1f1f2a;
 }
 
 </style>
+
 </head>
 
 <body>
 
 <header>
+
 <h1>La Ceiba</h1>
 <p>Relatos que nacen del alma</p>
+
+<button onclick="modoNocturno()">Modo nocturno</button>
+
 </header>
 
 <div class="container">
 
-<div id="relatos"></div>
+<h2>Biblioteca de relatos</h2>
 
-<div class="relato" id="editor">
+<div id="biblioteca">
 
-<h2>Nuevo relato</h2>
+<div class="relato-card">
 
-<input id="titulo" placeholder="Título del relato" style="width:100%;padding:10px;margin-bottom:10px">
+<h2>Mi primera publicación</h2>
 
-<textarea id="texto" placeholder="Escribe tu relato" style="width:100%;height:120px;padding:10px"></textarea>
+<p>Un texto encontrado en los recuerdos de la Yuleidys de 16 años.</p>
 
-<br><br>
+<button onclick="abrirRelato()">Leer relato</button>
 
-<button onclick="publicar()">Publicar</button>
+</div>
+
+</div>
+
+<div id="relato1" class="relato-completo">
+
+<h2>Mi primera publicación</h2>
+
+<div class="relato-texto">
+
+Esta es mi primera publicación, pero no es la primera vez que escribo. Es curioso que, mientras luchaba con la tecnología antigua de crear una página por código, me encontré con un viejo escrito de hace cinco años.
+
+Podría decir que mi estilo de escritura ha mejorado, pero sería desacreditar, en gran medida, lo que la Yuleidys de 16 años fue capaz de escribir a las 6 a. m., sin haber conocido aún las dulces mieles del amor ni el amargo veneno del mismo sentimiento.
+
+Esta no es una historia de ahora; es un reciclaje que encontré del 2021. Espero que disfruten de este texto, traído directamente de la Yuleidys de 16.
+
+"Se levantó por el sonido lejano de unas gotas de agua que parecían provenir del grifo..."
+
+(continúa el relato completo aquí)
+
+</div>
+
+<br>
+
+<button onclick="volver()">⬅ Volver a la biblioteca</button>
 
 </div>
 
 <div class="author">
 
-<div>
-
-<img id="avatar" src="yuleidys-cartoon.png">
-
-<div id="avatarEdit" style="display:none;margin-top:10px">
-
-<input type="file" id="avatarUpload">
-
-</div>
-
-</div>
+<img src="yuleidys-cartoon.png">
 
 <div>
 
@@ -167,7 +222,7 @@ line-height:1.8;
 
 Soy Yuleidys. Escribo relatos que nacen de emociones, recuerdos y momentos pequeños de la vida.
 
-La Ceiba es un pequeño refugio para quienes aman las historias y los pensamientos que aparecen cuando uno se detiene a sentir.
+La Ceiba es un pequeño refugio para quienes aman sentir y leer historias que brotan del alma.
 
 </p>
 
@@ -177,151 +232,73 @@ La Ceiba es un pequeño refugio para quienes aman las historias y los pensamient
 
 </div>
 
-<div class="modal" id="modal">
+<footer>
 
-<div class="book">
+La Ceiba 🌿
 
-<h2 id="modalTitle"></h2>
-
-<p id="modalText"></p>
-
-<button onclick="cerrar()">Cerrar</button>
-
-</div>
-
-</div>
+</footer>
 
 <script>
 
-function publicar(){
+function abrirRelato(){
 
-let titulo=document.getElementById('titulo').value
-
-let texto=document.getElementById('texto').value
-
-if(!titulo || !texto)return
-
-let relatos=JSON.parse(localStorage.getItem('relatos')||'[]')
-
-relatos.push({titulo,texto})
-
-localStorage.setItem('relatos',JSON.stringify(relatos))
-
-document.getElementById('titulo').value=''
-
-document.getElementById('texto').value=''
-
-cargar()
+document.getElementById("biblioteca").style.display="none";
+document.getElementById("relato1").style.display="block";
 
 }
 
-function cargar(){
+function volver(){
 
-let cont=document.getElementById('relatos')
-
-cont.innerHTML=''
-
-let relatos=JSON.parse(localStorage.getItem('relatos')||'[]')
-
-relatos.forEach((r,i)=>{
-
-let div=document.createElement('div')
-
-div.className='relato'
-
-div.innerHTML=`
-
-<h2>${r.titulo}</h2>
-
-<p>${r.texto.substring(0,120)}...</p>
-
-<button onclick="leer(${i})">Leer</button>
-
-`
-
-cont.appendChild(div)
-
-})
+document.getElementById("biblioteca").style.display="block";
+document.getElementById("relato1").style.display="none";
 
 }
 
-function leer(i){
+function modoNocturno(){
 
-let relatos=JSON.parse(localStorage.getItem('relatos')||'[]')
-
-document.getElementById('modalTitle').innerText=relatos[i].titulo
-
-document.getElementById('modalText').innerText=relatos[i].texto
-
-document.getElementById('modal').style.display='flex'
+document.body.classList.toggle("dark");
 
 }
 
-function cerrar(){
+/* hojas */
 
-document.getElementById('modal').style.display='none'
+function crearHoja(){
 
-}
+let leaf=document.createElement("div");
+leaf.className="leaf";
+leaf.innerText="🍂";
 
-function cargarAvatar(){
+leaf.style.left=Math.random()*100+"vw";
+leaf.style.animationDuration=(5+Math.random()*5)+"s";
 
-let saved=localStorage.getItem('avatar')
+document.body.appendChild(leaf);
 
-if(saved){
-
-document.getElementById('avatar').src=saved
-
-}
-
-}
-
-let uploader=document.getElementById('avatarUpload')
-
-if(uploader){
-
-uploader.addEventListener('change',function(){
-
-let file=this.files[0]
-
-let reader=new FileReader()
-
-reader.onload=function(e){
-
-let img=e.target.result
-
-document.getElementById('avatar').src=img
-
-localStorage.setItem('avatar',img)
+setTimeout(()=>leaf.remove(),10000);
 
 }
 
-reader.readAsDataURL(file)
+setInterval(crearHoja,800);
 
-})
+/* luciernagas */
 
-}
+for(let i=0;i<30;i++){
 
-window.onload=function(){
+let f=document.createElement("div");
+f.className="firefly";
 
-cargar()
+f.style.left=Math.random()*100+"vw";
+f.style.top=Math.random()*100+"vh";
 
-cargarAvatar()
-
-if(window.location.hash==='#edit'){
-
-document.getElementById('editor').style.display='block'
-
-document.getElementById('avatarEdit').style.display='block'
-
-}
+document.body.appendChild(f);
 
 }
 
 </script>
 
 </body>
-
 </html>
+
+
 
 
 
