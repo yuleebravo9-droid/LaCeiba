@@ -22,7 +22,7 @@ color:#3B2A22;
 header{
 background-image:url("https://i.pinimg.com/736x/ae/44/ae/ae44aecf04e81d829b7b62fa50cda247.jpg");
 background-size:cover;
-height:350px;
+height:340px;
 display:flex;
 flex-direction:column;
 justify-content:center;
@@ -68,6 +68,7 @@ border:none;
 padding:8px 14px;
 border-radius:6px;
 cursor:pointer;
+margin-top:5px;
 }
 
 /* lector */
@@ -77,8 +78,9 @@ display:none;
 background:#FFF6E9;
 padding:40px;
 border-radius:10px;
-line-height:1.9;
 }
+
+/* editor */
 
 #editor{
 display:none;
@@ -87,6 +89,8 @@ padding:20px;
 border-radius:10px;
 margin-bottom:40px;
 }
+
+/* autora */
 
 .author{
 display:flex;
@@ -195,8 +199,7 @@ animation:blink 3s infinite;
 <h3>Sobre la autora</h3>
 
 <p>
-Soy Yuleidys. Este es mi pequeño rincón literario llamado La Ceiba,
-donde comparto historias nacidas de recuerdos, emociones y pensamientos.
+Soy Yuleidys. Bienvenido a La Ceiba, mi pequeño refugio literario donde comparto historias nacidas de emociones y recuerdos.
 </p>
 
 </div>
@@ -208,6 +211,8 @@ donde comparto historias nacidas de recuerdos, emociones y pensamientos.
 <script>
 
 let relatos=JSON.parse(localStorage.getItem("relatos"))||[];
+
+let modoEditor=false;
 
 function guardar(){
 localStorage.setItem("relatos",JSON.stringify(relatos));
@@ -223,11 +228,22 @@ if(!t||!x)return;
 relatos.push({titulo:t,texto:x});
 
 guardar();
-
 mostrar();
 
 document.getElementById("titulo").value="";
 document.getElementById("texto").value="";
+
+}
+
+function eliminar(i){
+
+if(!modoEditor)return;
+
+relatos.splice(i,1);
+
+guardar();
+
+mostrar();
 
 }
 
@@ -243,13 +259,21 @@ let div=document.createElement("div");
 
 div.className="relato";
 
+let botones=`<button onclick="leer(${i})">Leer relato</button>`;
+
+if(modoEditor){
+
+botones+=`<br><button onclick="eliminar(${i})">Eliminar</button>`;
+
+}
+
 div.innerHTML=`
 
 <h3>${r.titulo}</h3>
 
 <p>${r.texto.substring(0,120)}...</p>
 
-<button onclick="leer(${i})">Leer relato</button>
+${botones}
 
 `;
 
@@ -299,10 +323,14 @@ function toggleDark(){
 document.body.classList.toggle("dark");
 }
 
-/* editor */
+/* modo editor */
 
 if(window.location.hash === "#edit"){
+
+modoEditor=true;
+
 document.getElementById("editor").style.display="block";
+
 }
 
 /* avatar */
@@ -310,7 +338,9 @@ document.getElementById("editor").style.display="block";
 let avatarGuardado=localStorage.getItem("avatar");
 
 if(avatarGuardado){
+
 document.getElementById("avatar").src=avatarGuardado;
+
 }
 
 let subir=document.getElementById("subirAvatar");
@@ -361,6 +391,7 @@ mostrar();
 
 </body>
 </html>
+
 
 
 
