@@ -2,16 +2,15 @@
 
 <html lang="es">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>La Ceiba</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Libre+Baskerville&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Libre+Baskerville&display=swap" rel="stylesheet">
 
 <style>
 
+/* Base */
 body{
 margin:0;
 font-family:'Libre Baskerville',serif;
@@ -23,21 +22,27 @@ overflow-x:hidden;
 header{
 background-image:url("https://i.pinimg.com/736x/ae/44/ae/ae44aecf04e81d829b7b62fa50cda247.jpg");
 background-size:cover;
-height:350px;
+background-position:center;
+height:340px;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-text-align:center;
 color:white;
+text-align:center;
 }
 
 header h1{
 font-family:'Playfair Display';
-font-size:70px;
+font-size:72px;
 background:rgba(0,0,0,0.4);
-padding:15px 35px;
-border-radius:10px;
+padding:12px 34px;
+border-radius:12px;
+margin:0;
+}
+
+header button{
+margin-top:15px;
 }
 
 .container{
@@ -46,11 +51,13 @@ margin:auto;
 padding:40px 20px;
 }
 
-.relato{
+/* Editor */
+#editor{
+display:none;
 background:#FFF6E9;
-padding:30px;
+padding:20px;
 border-radius:10px;
-margin-bottom:30px;
+margin-bottom:40px;
 box-shadow:0 10px 20px rgba(0,0,0,0.15);
 }
 
@@ -59,6 +66,17 @@ width:100%;
 padding:10px;
 margin-bottom:10px;
 font-family:'Libre Baskerville';
+border-radius:6px;
+border:none;
+}
+
+/* Biblioteca */
+.relato{
+background:#FFF6E9;
+padding:25px;
+border-radius:10px;
+margin-bottom:25px;
+box-shadow:0 10px 20px rgba(0,0,0,0.15);
 }
 
 button{
@@ -70,10 +88,21 @@ border-radius:6px;
 cursor:pointer;
 }
 
+/* Lectura tipo libro */
 #lector{
 display:none;
+background:#FFF6E9;
+padding:40px;
+border-radius:10px;
+line-height:1.9;
+box-shadow:0 10px 20px rgba(0,0,0,0.2);
 }
 
+#lector h2{
+font-family:'Playfair Display';
+}
+
+/* Comentarios */
 .comment{
 background:#eee;
 padding:6px;
@@ -81,19 +110,35 @@ margin-top:5px;
 border-radius:5px;
 }
 
-/* modo nocturno */
+/* Autor */
+.author{
+display:flex;
+gap:20px;
+background:#FFF6E9;
+padding:20px;
+border-radius:10px;
+margin-top:40px;
+}
 
+.author img{
+width:130px;
+border-radius:50%;
+}
+
+/* Modo nocturno */
 .dark{
 background:#0f0f18;
 color:#eee;
 }
 
-.dark .relato{
-background:#1e1e2a;
+.dark .relato,
+.dark #editor,
+.dark #lector,
+.dark .author{
+background:#1f1f2a;
 }
 
-/* estrellas */
-
+/* Estrellas */
 .star{
 position:fixed;
 width:2px;
@@ -101,8 +146,7 @@ height:2px;
 background:white;
 }
 
-/* luciernagas */
-
+/* Luciernagas */
 .firefly{
 position:fixed;
 width:6px;
@@ -125,32 +169,33 @@ animation:blink 3s infinite;
 <body>
 
 <header>
-
 <h1>La Ceiba</h1>
-
 <button onclick="toggleDark()">Modo nocturno</button>
-
 </header>
 
 <div class="container">
 
+<div id="editor">
+
 <h2>Escribir relato</h2>
 
-<input id="titulo" placeholder="Título">
+<input id="titulo" placeholder="Título del relato">
 
-<textarea id="texto" rows="6" placeholder="Escribe tu relato..."></textarea>
+<textarea id="texto" rows="7" placeholder="Escribe tu relato..."></textarea>
 
 <button onclick="publicar()">Publicar</button>
 
-<h2>Buscar</h2>
+</div>
 
-<input id="buscar" onkeyup="buscar()" placeholder="Buscar relatos">
+<h2>Buscar relatos</h2>
+
+<input id="buscar" placeholder="Buscar..." onkeyup="buscar()">
 
 <h2>Biblioteca</h2>
 
 <div id="biblioteca"></div>
 
-<div id="lector" class="relato">
+<div id="lector">
 
 <h2 id="tituloLectura"></h2>
 
@@ -158,7 +203,24 @@ animation:blink 3s infinite;
 
 <p id="contador"></p>
 
-<button onclick="volver()">⬅ Volver</button>
+<button onclick="volver()">⬅ Volver a la biblioteca</button>
+
+</div>
+
+<div class="author">
+
+<img src="yuleidys-cartoon.png">
+
+<div>
+
+<h3>Sobre la autora</h3>
+
+<p>
+Soy Yuleidys. Escribo relatos que nacen de emociones, recuerdos y momentos pequeños de la vida.
+La Ceiba es un refugio para quienes aman leer historias que brotan del alma.
+</p>
+
+</div>
 
 </div>
 
@@ -166,11 +228,15 @@ animation:blink 3s infinite;
 
 <script>
 
+/* datos */
+
 let relatos=JSON.parse(localStorage.getItem("relatos"))||[];
 
 function guardar(){
 localStorage.setItem("relatos",JSON.stringify(relatos));
 }
+
+/* publicar */
 
 function publicar(){
 
@@ -190,7 +256,12 @@ lecturas:0
 guardar();
 mostrar();
 
+document.getElementById("titulo").value="";
+document.getElementById("texto").value="";
+
 }
+
+/* mostrar biblioteca */
 
 function mostrar(){
 
@@ -206,24 +277,19 @@ div.innerHTML=`
 
 <h3>${r.titulo}</h3>
 
-<p>${r.texto.substring(0,120)}...</p>
+<p>${r.texto.substring(0,140)}...</p>
 
 <button onclick="leer(${i})">Leer</button>
 
 <button onclick="like(${i})">❤️ ${r.likes}</button>
 
 <div>
-
 <input id="c${i}" placeholder="Comentar">
-
 <button onclick="comentar(${i})">Enviar</button>
-
 </div>
 
 <div>
-
 ${r.comentarios.map(c=>"<div class='comment'>"+c+"</div>").join("")}
-
 </div>
 
 `;
@@ -233,6 +299,8 @@ cont.appendChild(div);
 });
 
 }
+
+/* leer relato */
 
 function leer(i){
 
@@ -250,6 +318,8 @@ guardar();
 
 }
 
+/* volver */
+
 function volver(){
 
 document.getElementById("biblioteca").style.display="block";
@@ -257,14 +327,15 @@ document.getElementById("lector").style.display="none";
 
 }
 
+/* like */
+
 function like(i){
-
 relatos[i].likes++;
-
 guardar();
 mostrar();
-
 }
+
+/* comentarios */
 
 function comentar(i){
 
@@ -278,6 +349,8 @@ guardar();
 mostrar();
 
 }
+
+/* buscar */
 
 function buscar(){
 
@@ -293,13 +366,17 @@ let div=document.createElement("div");
 
 div.className="relato";
 
-div.innerHTML=`<h3>${r.titulo}</h3><p>${r.texto.substring(0,120)}...</p><button onclick="leer(${i})">Leer</button>`;
+div.innerHTML=`<h3>${r.titulo}</h3>
+<p>${r.texto.substring(0,140)}...</p>
+<button onclick="leer(${i})">Leer</button>`;
 
 cont.appendChild(div);
 
 });
 
 }
+
+/* modo nocturno */
 
 function toggleDark(){
 
@@ -308,6 +385,8 @@ document.body.classList.toggle("dark");
 crearEstrellas();
 
 }
+
+/* estrellas */
 
 function crearEstrellas(){
 
@@ -325,9 +404,15 @@ document.body.appendChild(s);
 
 }
 
+/* editor solo con #edit */
+
+if(window.location.hash === "#edit"){
+document.getElementById("editor").style.display="block";
+}
+
 /* luciernagas */
 
-for(let i=0;i<20;i++){
+for(let i=0;i<18;i++){
 
 let f=document.createElement("div");
 f.className="firefly";
@@ -345,6 +430,7 @@ mostrar();
 
 </body>
 </html>
+
 
 
 
