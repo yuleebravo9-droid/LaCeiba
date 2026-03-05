@@ -9,8 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Libre+Baskerville&display=swap" rel="stylesheet">
 
 <style>
-
-/* Base */
 body{
 margin:0;
 font-family:'Libre Baskerville',serif;
@@ -51,7 +49,7 @@ margin:auto;
 padding:40px 20px;
 }
 
-/* Editor */
+/* editor */
 #editor{
 display:none;
 background:#FFF6E9;
@@ -70,7 +68,7 @@ border-radius:6px;
 border:none;
 }
 
-/* Biblioteca */
+/* biblioteca */
 .relato{
 background:#FFF6E9;
 padding:25px;
@@ -88,7 +86,7 @@ border-radius:6px;
 cursor:pointer;
 }
 
-/* Lectura tipo libro */
+/* lector */
 #lector{
 display:none;
 background:#FFF6E9;
@@ -102,7 +100,7 @@ box-shadow:0 10px 20px rgba(0,0,0,0.2);
 font-family:'Playfair Display';
 }
 
-/* Comentarios */
+/* comentarios */
 .comment{
 background:#eee;
 padding:6px;
@@ -110,7 +108,7 @@ margin-top:5px;
 border-radius:5px;
 }
 
-/* Autor */
+/* autor */
 .author{
 display:flex;
 gap:20px;
@@ -118,6 +116,7 @@ background:#FFF6E9;
 padding:20px;
 border-radius:10px;
 margin-top:40px;
+align-items:center;
 }
 
 .author img{
@@ -125,7 +124,12 @@ width:130px;
 border-radius:50%;
 }
 
-/* Modo nocturno */
+#avatarEditor{
+display:none;
+margin-top:10px;
+}
+
+/* modo nocturno */
 .dark{
 background:#0f0f18;
 color:#eee;
@@ -138,7 +142,7 @@ color:#eee;
 background:#1f1f2a;
 }
 
-/* Estrellas */
+/* estrellas */
 .star{
 position:fixed;
 width:2px;
@@ -146,7 +150,7 @@ height:2px;
 background:white;
 }
 
-/* Luciernagas */
+/* luciernagas */
 .firefly{
 position:fixed;
 width:6px;
@@ -161,7 +165,6 @@ animation:blink 3s infinite;
 0%,100%{opacity:0.2}
 50%{opacity:1}
 }
-
 </style>
 
 </head>
@@ -209,7 +212,17 @@ animation:blink 3s infinite;
 
 <div class="author">
 
-<img src="yuleidys-cartoon.png">
+<div>
+
+<img id="avatar" src="yuleidys-cartoon.png.png">
+
+<div id="avatarEditor">
+
+<input type="file" id="subirAvatar">
+
+</div>
+
+</div>
 
 <div>
 
@@ -227,8 +240,6 @@ La Ceiba es un refugio para quienes aman leer historias que brotan del alma.
 </div>
 
 <script>
-
-/* datos */
 
 let relatos=JSON.parse(localStorage.getItem("relatos"))||[];
 
@@ -300,7 +311,7 @@ cont.appendChild(div);
 
 }
 
-/* leer relato */
+/* leer */
 
 function leer(i){
 
@@ -404,10 +415,47 @@ document.body.appendChild(s);
 
 }
 
-/* editor solo con #edit */
+/* editor y avatar solo en modo edit */
 
 if(window.location.hash === "#edit"){
+
 document.getElementById("editor").style.display="block";
+document.getElementById("avatarEditor").style.display="block";
+
+}
+
+/* subir avatar */
+
+let avatarGuardado = localStorage.getItem("avatar");
+
+if(avatarGuardado){
+document.getElementById("avatar").src = avatarGuardado;
+}
+
+let subir=document.getElementById("subirAvatar");
+
+if(subir){
+
+subir.addEventListener("change",function(){
+
+let file=this.files[0];
+
+let reader=new FileReader();
+
+reader.onload=function(e){
+
+let img=e.target.result;
+
+document.getElementById("avatar").src=img;
+
+localStorage.setItem("avatar",img);
+
+}
+
+reader.readAsDataURL(file);
+
+});
+
 }
 
 /* luciernagas */
@@ -430,6 +478,8 @@ mostrar();
 
 </body>
 </html>
+
+
 
 
 
