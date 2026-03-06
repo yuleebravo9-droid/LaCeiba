@@ -1,16 +1,8 @@
-<!DOCTYPE html>
+<!DOCTYPE html><html lang="es">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>La Ceiba</title><link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Libre+Baskerville&display=swap" rel="stylesheet"><style>
 
-<html lang="es">
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>La Ceiba</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Libre+Baskerville&display=swap" rel="stylesheet">
-
-<style>
+/* ===== GENERAL ===== */
 
 body{
 margin:0;
@@ -22,13 +14,14 @@ color:#3B2A22;
 header{
 background-image:url("https://i.pinimg.com/736x/ae/44/ae/ae44aecf04e81d829b7b62fa50cda247.jpg");
 background-size:cover;
+background-position:center;
 height:340px;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-color:white;
 text-align:center;
+color:white;
 }
 
 header h1{
@@ -37,49 +30,42 @@ font-size:70px;
 background:rgba(0,0,0,0.4);
 padding:12px 30px;
 border-radius:10px;
+margin:0;
 }
+
 .container{
 max-width:900px;
 margin:auto;
 padding:40px 20px;
 }
 
+/* ===== RELATOS ===== */
+
 .relato{
 background:#FFF6E9;
 padding:30px;
 border-radius:10px;
-margin-bottom:40px;
+margin-bottom:30px;
 box-shadow:0 10px 20px rgba(0,0,0,0.15);
 white-space:pre-line;
 }
-  
-textarea,input{
-width:100%;
-padding:10px;
-margin-bottom:10px;
-font-family:'Libre Baskerville';
+
+.relato h3{
+font-family:'Playfair Display';
+margin-top:0;
 }
 
 button{
 background:#C85C2E;
 color:white;
 border:none;
-padding:8px 14px;
+padding:10px 14px;
 border-radius:6px;
 cursor:pointer;
 margin-top:5px;
 }
 
-/* lector */
-
-#lector{
-display:none;
-background:#FFF6E9;
-padding:40px;
-border-radius:10px;
-}
-
-/* editor */
+/* ===== EDITOR ===== */
 
 #editor{
 display:none;
@@ -89,7 +75,25 @@ border-radius:10px;
 margin-bottom:40px;
 }
 
-/* autora */
+textarea,input{
+width:100%;
+padding:10px;
+margin-bottom:10px;
+font-family:'Libre Baskerville';
+border-radius:6px;
+border:none;
+}
+
+/* ===== LECTOR ===== */
+
+#lector{
+display:none;
+background:#FFF6E9;
+padding:30px;
+border-radius:10px;
+}
+
+/* ===== AUTORA ===== */
 
 .author{
 display:flex;
@@ -106,7 +110,7 @@ width:120px;
 border-radius:50%;
 }
 
-/* modo nocturno */
+/* ===== MODO OSCURO ===== */
 
 .dark{
 background:#111118;
@@ -120,7 +124,7 @@ color:#eee;
 background:#1f1f2a;
 }
 
-/* luciernagas */
+/* ===== LUCIERNAGAS ===== */
 
 .firefly{
 position:fixed;
@@ -137,77 +141,54 @@ animation:blink 3s infinite;
 50%{opacity:1}
 }
 
-</style>
+/* ===== DISEÑO CELULAR ===== */
 
-</head>
+@media (max-width:768px){
 
-<body>
+header{
+height:240px;
+padding:20px;
+}
 
-<header>
+header h1{
+font-size:40px;
+padding:10px 20px;
+}
 
-<h1>La Ceiba</h1>
+.container{
+padding:20px 15px;
+}
 
-<button onclick="toggleDark()">Modo nocturno</button>
+.relato{
+padding:20px;
+font-size:16px;
+}
 
-</header>
+.author{
+flex-direction:column;
+text-align:center;
+}
 
-<div class="container">
+.author img{
+width:90px;
+margin-bottom:10px;
+}
 
-<div id="editor">
+button{
+width:100%;
+}
 
-<h2>Nuevo relato</h2>
+}
 
-<input id="titulo" placeholder="Título">
+</style></head><body><header><h1>La Ceiba</h1><button onclick="toggleDark()">Modo nocturno</button>
 
-<textarea id="texto" rows="8" placeholder="Escribe tu relato"></textarea>
+</header><div class="container"><!-- EDITOR --><div id="editor"><h2>Nuevo relato</h2><input id="titulo" placeholder="Título del relato"><textarea id="texto" rows="8" placeholder="Escribe tu relato"></textarea><button onclick="publicar()">Publicar relato</button>
 
-<button onclick="publicar()">Publicar relato</button>
+<hr><h3>Cambiar avatar</h3><input type="file" id="subirAvatar"></div><!-- BUSCADOR --><h2>Buscar relatos</h2><input id="buscar" placeholder="Buscar..." onkeyup="buscar()"><!-- BIBLIOTECA --><div id="biblioteca"></div><!-- LECTOR --><div id="lector"><h2 id="tituloLectura"></h2><p id="textoLectura"></p><button onclick="volver()">⬅ Volver a la biblioteca</button>
 
-<hr>
-
-<h3>Cambiar avatar</h3>
-
-<input type="file" id="subirAvatar">
-
-</div>
-
-<h2>Buscar</h2>
-
-<input id="buscar" placeholder="Buscar relatos..." onkeyup="buscar()">
-
-<h2>Biblioteca</h2>
-
-<div id="biblioteca"></div>
-
-<div id="lector">
-
-<h2 id="tituloLectura"></h2>
-
-<p id="textoLectura"></p>
-
-<button onclick="volver()">⬅ Volver a la biblioteca</button>
-
-</div>
-
-<div class="author">
-
-<img id="avatar">
-
-<div>
-
-<h3>Sobre la autora</h3>
-
-<p>
-Soy Yule. Bienvenido a La Ceiba, un pequeño rincón literario donde comparto historias nacidas de recuerdos del alma o eso quiero creer. 0u0
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-<script>
+</div><!-- AUTORA --><div class="author"><img id="avatar"><div><h3>Sobre la autora</h3><p>
+Soy Yuleidys. Bienvenido a La Ceiba, un espacio donde comparto historias nacidas de emociones, recuerdos y pensamientos.
+</p></div></div></div><script>
 
 let relatos=JSON.parse(localStorage.getItem("relatos"))||[];
 
@@ -254,17 +235,17 @@ cont.innerHTML="";
 
 relatos.forEach((r,i)=>{
 
-let div=document.createElement("div");
-
-div.className="relato";
-
 let botones=`<button onclick="leer(${i})">Leer relato</button>`;
 
 if(modoEditor){
 
-botones+=`<br><button onclick="eliminar(${i})">Eliminar</button>`;
+botones+=`<button onclick="eliminar(${i})">Eliminar</button>`;
 
 }
+
+let div=document.createElement("div");
+
+div.className="relato";
 
 div.innerHTML=`
 
@@ -322,7 +303,7 @@ function toggleDark(){
 document.body.classList.toggle("dark");
 }
 
-/* modo editor */
+/* editor */
 
 if(window.location.hash === "#edit"){
 
@@ -386,10 +367,9 @@ document.body.appendChild(f);
 
 mostrar();
 
-</script>
-
-</body>
+</script></body>
 </html>
+
 
 
 
